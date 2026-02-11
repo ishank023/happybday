@@ -2,7 +2,7 @@
 <html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>HBD MUMMY</title>	    
+    <title>HBD MUMMY</title>        
     <link type="text/css" rel="stylesheet" href="./file/default.css">
     <script type="text/javascript" src="./file/jquery.min.js"></script>
     <script type="text/javascript" src="./file/jscex.min.js"></script>
@@ -27,26 +27,20 @@
             <source src="aud.mp3" type="audio/mp3" />
             <embed height="100" width="100" src="aud.mp3" />
         </audio>
-      <div id="wrap">
-    <div id="text">
-        <div id="code">
-            <span class="say">Happy Birthday, Mummyyyy! 🎈</span><br>
-            <span class="say">You are the original architect of my life. 🛠️</span><br>
-            <span class="say">Thank you for everything you do. ❤️</span><br>
-            <span class="say">Wishing you a day as wonderful as you are. 🌸</span><br>
-            <br>
-            <span class="say">~ ~ ISHANK❤️</span>
-        </div>
-    </div>
-    <div id="clock-box">
-        The world has been luckier for:
-        <div id="clock"></div>
-    </div>
-    <canvas id="canvas"></canvas>
-</div>
-
+        <div id="wrap">
+            <div id="text">
+                <div id="code">
+                    <span class="say">Happy Birthday, Mummyyyy! 🎈</span><br>
+                    <span class="say">You are the original architect of my life. 🛠️</span><br>
+                    <span class="say">Thank you for everything you do. ❤️</span><br>
+                    <span class="say">Wishing you a day as wonderful as you are. 🌸</span><br>
+                    <br>
+                    <span class="say">~ ~ ISHANK❤️</span>
+                </div>
+            </div>
             <div id="clock-box">
-                <span id="clock">18,994  days 0 hours 0 minutes 0 seconds</span> <!-- Change to "6940 days..." if needed -->
+                The world has been luckier for:
+                <div id="clock"></div>
             </div>
             <canvas id="canvas" width="1100" height="680"></canvas>
         </div>
@@ -55,7 +49,7 @@
     <script>
     (function() {
         var canvas = $('#canvas');
-		
+        
         if (!canvas[0].getContext) {
             $("#error").show();
             return false;
@@ -173,13 +167,27 @@
         var textAnimate = eval(Jscex.compile("async", function () {
             $("#code").show().typewriter();
         }));
-	    
+        
         var runAsync = eval(Jscex.compile("async", function () {
             $await(seedAnimate());
             $await(growAnimate());
             $await(flowAnimate());
             $await(moveAnimate());
             textAnimate().start();
+
+            // Clock Logic
+            var together = new Date();
+            together.setFullYear(1975, 4, 20); // EDIT BIRTH DATE HERE (Year, Month-1, Day)
+            together.setHours(0);
+            together.setMinutes(0);
+            together.setSeconds(0);
+            together.setMilliseconds(0);
+
+            $("#clock-box").fadeIn(500);
+            while (true) {
+                timeElapse(together);
+                $await(Jscex.Async.sleep(1000));
+            }
         }));
 
         runAsync().start();
